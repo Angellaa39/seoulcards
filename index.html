@@ -1502,7 +1502,6 @@ function render(){
   $("chips").innerHTML =
     cats.map(category => `
       <span class="chip">
-        ${esc(category.icon || "📚")}
         ${esc(category.name)}
         <button
           type="button"
@@ -1526,7 +1525,6 @@ function render(){
 
       <option value="${category.id}">
 
-        ${esc(category.icon || "📚")}
         ${esc(category.name)}
 
       </option>
@@ -1803,8 +1801,7 @@ function editCard(id){
                     : ""
                 }>
 
-                ${esc(category.icon || "📚")}
-                ${esc(category.name)}
+                        ${esc(category.name)}
 
               </option>
 
