@@ -500,6 +500,9 @@ select:focus{
 .editBox{
   grid-column:1/-1;
 
+  position:relative;
+  z-index:1100;
+
   background:var(--surface);
 
   border:1px solid var(--line);
@@ -509,6 +512,9 @@ select:focus{
   padding:14px;
 
   margin-top:4px;
+
+  width:100%;
+  box-sizing:border-box;
 }
 
 .editActions{
@@ -1110,6 +1116,20 @@ body.review-theme .progress>div{
           id="audio"
           type="file"
           accept="audio/*">
+
+        <div style="display:flex;align-items:center;gap:8px;margin-top:7px;">
+          <button
+            class="btn secondary"
+            id="recordCreateAudio"
+            type="button">
+            🎙️ Enregistrer ma voix
+          </button>
+
+          <span
+            id="createAudioStatus"
+            class="recordStatus">
+          </span>
+        </div>
 
       </div>
 
@@ -2074,6 +2094,166 @@ async function saveEdit(id){
 
 
 /* =====================================================
+   ENREGISTREMENT AUDIO — CRÉATION DE CARTE
+===================================================== */
+
+let createRecorder = null;
+let createRecordedChunks = [];
+let createAudioFile = null;
+
+async function startCreateRecording(){
+
+  const button = $("recordCreateAudio");
+  const status = $("createAudioStatus");
+
+  if(
+    createRecorder &&
+    createRecorder.state === "recording"
+  ){
+    createRecorder.stop();
+    return;
+  }
+
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ){
+    return toast(
+      "Ton navigateur ne permet pas l'enregistrement audio."
+    );
+  }
+
+  try{
+
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
+
+    createRecordedChunks = [];
+
+    let mimeType = "";
+
+    if(
+      MediaRecorder.isTypeSupported(
+        "audio/webm;codecs=opus"
+      )
+    ){
+      mimeType = "audio/webm;codecs=opus";
+    }
+    else if(
+      MediaRecorder.isTypeSupported("audio/webm")
+    ){
+      mimeType = "audio/webm";
+    }
+    else if(
+      MediaRecorder.isTypeSupported("audio/mp4")
+    ){
+      mimeType = "audio/mp4";
+    }
+
+    createRecorder =
+      mimeType
+      ? new MediaRecorder(stream,{mimeType})
+      : new MediaRecorder(stream);
+
+    if(button){
+      button.textContent = "⏹️ Arrêter";
+      button.classList.add("recording");
+    }
+
+    if(status){
+      status.textContent = "🔴 Enregistrement…";
+    }
+
+    toast("🎙️ Enregistrement en cours…");
+
+    createRecorder.ondataavailable =
+      event => {
+        if(event.data.size){
+          createRecordedChunks.push(event.data);
+        }
+      };
+
+    createRecorder.onstop =
+      () => {
+
+        stream
+          .getTracks()
+          .forEach(track => track.stop());
+
+        if(!createRecordedChunks.length){
+          if(status) status.textContent = "";
+          createRecorder = null;
+          return;
+        }
+
+        const finalType =
+          createRecorder.mimeType ||
+          mimeType ||
+          "audio/webm";
+
+        const extension =
+          finalType.includes("mp4")
+            ? "mp4"
+            : "webm";
+
+        const blob =
+          new Blob(
+            createRecordedChunks,
+            {type:finalType}
+          );
+
+        createAudioFile =
+          new File(
+            [blob],
+            `recording-${Date.now()}.${extension}`,
+            {type:finalType}
+          );
+
+        const audioInput = $("audio");
+        if(audioInput){
+          audioInput.value = "";
+        }
+
+        if(button){
+          button.textContent = "🎙️ Refaire l'enregistrement";
+          button.classList.remove("recording");
+        }
+
+        if(status){
+          status.textContent = "✅ Audio enregistré";
+        }
+
+        toast("🎉 Audio prêt pour la création de la carte.");
+
+        createRecordedChunks = [];
+        createRecorder = null;
+      };
+
+    createRecorder.start();
+
+  }catch(error){
+
+    console.error(error);
+
+    if(button){
+      button.textContent = "🎙️ Enregistrer ma voix";
+      button.classList.remove("recording");
+    }
+
+    if(status){
+      status.textContent = "";
+    }
+
+    toast(
+      "Impossible d'accéder au microphone. Autorise le micro dans ton navigateur."
+    );
+  }
+}
+
+
+/* =====================================================
    ENREGISTREMENT MICROPHONE
 ===================================================== */
 
@@ -2572,9 +2752,12 @@ $("addCard").onclick =
       $("image")
         .files[0];
 
-    const audioFile =
+    const selectedAudioFile =
       $("audio")
         .files[0];
+
+    const audioFile =
+      createAudioFile || selectedAudioFile;
 
 
     if(
@@ -2672,6 +2855,24 @@ $("addCard").onclick =
       $("audio").value =
         "";
 
+      createAudioFile = null;
+
+      const createAudioStatus =
+        $("createAudioStatus");
+
+      if(createAudioStatus){
+        createAudioStatus.textContent = "";
+      }
+
+      const recordCreateAudio =
+        $("recordCreateAudio");
+
+      if(recordCreateAudio){
+        recordCreateAudio.textContent =
+          "🎙️ Enregistrer ma voix";
+        recordCreateAudio.classList.remove("recording");
+      }
+
 
       await load();
 
@@ -2692,6 +2893,15 @@ $("addCard").onclick =
     }
 
   };
+
+
+const recordCreateAudio =
+  $("recordCreateAudio");
+
+if(recordCreateAudio){
+  recordCreateAudio.onclick =
+    startCreateRecording;
+}
 
 
 /* =====================================================
