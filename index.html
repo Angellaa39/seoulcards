@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -311,115 +310,171 @@ select:focus{
 ========================= */
 
 .cards{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+   display:grid;
+   grid-template-columns:repeat(4,minmax(0,1fr));
+   gap:14px;
+   align-items:start;
 }
 
 .cardrow{
-  display:grid;
+   position:relative;
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:flex-start;
+   gap:7px;
+   min-height:180px;
+   padding:12px 10px 14px;
+   background:#e8a9a5;
+   border:1px solid #d47f78;
+   border-radius:14px;
+   cursor:pointer;
+   overflow:visible;
+   transition:
+     transform .18s ease,
+     box-shadow .18s ease,
+     border-color .18s ease;
+}
 
-  grid-template-columns:
-    54px
-    1fr
-    1fr
-    auto;
+.cardrow:hover{
+   transform:translateY(-2px);
+   box-shadow:0 10px 22px -18px #2b2420;
+}
 
-  gap:12px;
+.cardrow.selected{
+   border-color:var(--red);
+   box-shadow:0 10px 25px -18px #2b2420;
+}
 
-  align-items:center;
-
-  background:#e8a9a5;
-
-  border:1px solid #d47f78;
-
-  border-radius:12px;
-
-  padding:7px 10px;
+.cardVisual{
+   width:100%;
+   height:112px;
+   display:flex;
+   align-items:center;
+   justify-content:center;
 }
 
 .cardrow img,
-.thumb{
-  width:48px;
-  height:48px;
+.cardrow .thumb{
+   width:110px;
+   height:110px;
+   border-radius:12px;
+   object-fit:cover;
+   background:#d99490;
+}
 
-  border-radius:8px;
+.cardrow .thumb{
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-size:34px;
+   color:#7a403c;
+}
 
-  object-fit:cover;
-
-  background:#d99490;
+.cardWords{
+   width:100%;
+   text-align:center;
+   line-height:1.2;
 }
 
 .ko{
-  font-family:Georgia,serif;
-  font-weight:bold;
+   font-family:Georgia,serif;
+   font-weight:bold;
+   font-size:20px;
 }
 
 .fr{
-  font-size:13px;
-  color:#5a3230;
+   font-size:13px;
+   color:#5a3230;
+   margin-top:3px;
 }
 
-/* =========================
-   CARD ACTIONS
-========================= */
-
 .cardActions{
-  display:flex;
-  gap:5px;
+   position:absolute;
+   inset:0;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   flex-direction:row;
+   gap:8px;
+   padding:10px;
+   background:rgba(232,169,165,.92);
+   border-radius:14px;
+   opacity:0;
+   visibility:hidden;
+   pointer-events:none;
+   z-index:1000;
+   transition:
+     opacity .18s ease,
+     visibility .18s ease;
+}
 
-  justify-content:flex-end;
-
-  flex-wrap:wrap;
+.cardrow.selected .cardActions{
+   opacity:1;
+   visibility:visible;
+   pointer-events:auto;
 }
 
 .iconBtn{
-  border:1px solid var(--line);
-
-  background:var(--surface);
-  color:var(--text);
-
-  border-radius:8px;
-
-  min-width:34px;
-  height:34px;
-
-  padding:0 7px;
-
-  font-size:16px;
-
-  transition:
-    background .2s ease,
-    color .2s ease,
-    transform .15s ease;
+   border:1px solid var(--line);
+   background:var(--surface);
+   color:var(--text);
+   border-radius:8px;
+   width:34px;
+   height:34px;
+   padding:0;
+   font-size:16px;
+   transition:
+     background .2s ease,
+     color .2s ease,
+     transform .15s ease;
 }
 
 .iconBtn:hover{
-  background:var(--surface2);
+   background:var(--surface2);
 }
 
 .iconBtn:active{
-  transform:scale(.95);
+   transform:scale(.95);
 }
 
 .iconBtn.delete{
-  color:var(--red);
+   color:var(--red);
 }
 
 .iconBtn.record{
-  color:var(--green);
+   color:var(--green);
 }
 
 .iconBtn.recording{
-  color:white;
-
-  background:var(--red);
-  border-color:var(--red);
-
-  animation:
-    recordingPulse 1s infinite;
+   color:white;
+   background:var(--red);
+   border-color:var(--red);
+   animation:recordingPulse 1s infinite;
 }
 
+@media(max-width:900px){
+   .cards{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+   }
+}
+
+@media(max-width:650px){
+   .cards{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+   }
+
+   .cardrow{
+      min-height:165px;
+   }
+
+   .cardrow img,
+   .cardrow .thumb{
+      width:96px;
+      height:96px;
+   }
+}
 @keyframes recordingPulse{
 
   0%,
@@ -873,24 +928,6 @@ body.review-theme .progress>div{
 ========================= */
 
 @media(max-width:650px){
-
-  .cardrow{
-    grid-template-columns:
-      52px
-      1fr
-      auto;
-  }
-
-  .cardrow .fr{
-    grid-column:2;
-  }
-
-  .cardActions{
-    grid-column:3;
-    grid-row:1/3;
-
-    flex-direction:column;
-  }
 
   .answer{
     flex-direction:column;
@@ -1523,11 +1560,14 @@ function cardHtml(card){
 
   return `
 
-    <div class="cardrow">
+    <div
+      class="cardrow"
+      data-card-id="${card.id}"
+      onclick="selectCard('${card.id}')">
 
       <!-- IMAGE -->
 
-      <div>
+      <div class="cardVisual">
 
         ${
           card.image_url
@@ -1537,45 +1577,41 @@ function cardHtml(card){
           `
             <img
               src="${esc(card.image_url)}"
-              alt="">
+              alt="${esc(card.french || card.korean)}">
           `
 
           :
 
           `
-            <div class="thumb"></div>
+            <div class="thumb">
+              🖼️
+            </div>
           `
         }
 
       </div>
 
 
-      <!-- CORÉEN -->
+      <!-- MOTS -->
 
-      <div>
+      <div class="cardWords">
 
         <div class="ko">
-
           ${esc(card.korean)}
-
         </div>
 
-      </div>
-
-
-      <!-- FRANÇAIS -->
-
-      <div class="fr">
-
-        ${esc(card.french)}
+        <div class="fr">
+          ${esc(card.french)}
+        </div>
 
       </div>
 
 
       <!-- ACTIONS -->
 
-      <div class="cardActions">
-
+      <div
+        class="cardActions"
+        onclick="event.stopPropagation()">
 
         ${
           card.audio_url
@@ -1587,9 +1623,7 @@ function cardHtml(card){
               class="iconBtn"
               title="Écouter l'audio"
               onclick="playAudio('${esc(card.audio_url)}')">
-
               🔊
-
             </button>
           `
 
@@ -1598,41 +1632,26 @@ function cardHtml(card){
           ""
         }
 
-
-        <!-- ENREGISTRER -->
-
         <button
           class="iconBtn record"
           id="record-btn-${card.id}"
           title="Enregistrer ma voix"
           onclick="startRecording('${card.id}')">
-
           🎙️
-
         </button>
-
-
-        <!-- MODIFIER -->
 
         <button
           class="iconBtn"
           title="Modifier"
           onclick="editCard('${card.id}')">
-
           ✏️
-
         </button>
-
-
-        <!-- SUPPRIMER -->
 
         <button
           class="iconBtn delete"
           title="Supprimer"
           onclick="delCard('${card.id}')">
-
           🗑️
-
         </button>
 
       </div>
@@ -1642,7 +1661,8 @@ function cardHtml(card){
 
       <div
         id="edit-${card.id}"
-        class="editBox hidden">
+        class="editBox hidden"
+        onclick="event.stopPropagation()">
       </div>
 
     </div>
@@ -1650,6 +1670,34 @@ function cardHtml(card){
   `;
 
 }
+
+
+function selectCard(id){
+
+  const clickedCard = document.querySelector(
+    `.cardrow[data-card-id="${id}"]`
+  );
+
+  if(!clickedCard) return;
+
+  const wasSelected =
+    clickedCard.classList.contains("selected");
+
+  // Ferme toutes les cartes
+  document
+    .querySelectorAll(".cardrow.selected")
+    .forEach(card => {
+      card.classList.remove("selected");
+    });
+
+  // Si la carte n'était pas déjà ouverte,
+  // on l'ouvre. Sinon elle reste fermée.
+  if(!wasSelected){
+    clickedCard.classList.add("selected");
+  }
+
+}
+
 
 
 /* =====================================================
@@ -2431,6 +2479,9 @@ window.playAudio =
 
 window.delCard =
   delCard;
+
+window.selectCard =
+  selectCard;
 
 
 /* =====================================================
