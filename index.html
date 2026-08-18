@@ -630,6 +630,35 @@ select:focus{
 }
 
 /* =========================
+   VERBS THEME
+========================= */
+
+body.verbs-theme{
+  --bg:#eaf6ff; --surface:#f8fcff; --surface2:#d9efff;
+  --line:#a8d4ee; --text:#17384d; --dim:#58758a;
+  --red:#3b9bd6; --gold:#e7b84b; --green:#2f8f67; --teal:#318fbd;
+  background:#eaf6ff;
+  background-image:radial-gradient(circle at 10% 8%,#3b9bd622,transparent 38%),radial-gradient(circle at 90% 12%,#6fc3ed22,transparent 40%),radial-gradient(circle at 50% 95%,#a8dcfa25,transparent 45%);
+}
+body.verbs-theme .brand{color:#318fbd;}
+body.verbs-theme .top{border-color:#a8d4ee;}
+body.verbs-theme .tabs{background:#f8fcff;border-color:#a8d4ee;}
+body.verbs-theme .tab{color:#58758a;}
+body.verbs-theme .tab.active{background:#5bb3e8;color:white;}
+body.verbs-theme .panel{background:#f8fcff;border-color:#a8d4ee;}
+body.verbs-theme .title{color:#287da8;}
+body.verbs-theme .hint{color:#58758a;}
+body.verbs-theme input,body.verbs-theme select{background:#eaf6ff;border-color:#a8d4ee;color:#17384d;}
+body.verbs-theme input:focus,body.verbs-theme select:focus{border-color:#318fbd;}
+body.verbs-theme .btn{background:#3b9bd6;color:white;}
+body.verbs-theme .btn.gold{background:#e7b84b;color:#17384d;}
+body.verbs-theme .btn.secondary{background:#d9efff;color:#17384d;border-color:#a8d4ee;}
+body.verbs-theme .verbItem{background:#d9efff;border-color:#a8d4ee;}
+body.verbs-theme .verbItemLabel{color:#58758a;}
+body.verbs-theme .verbListCard{background:#f8fcff;border-color:#a8d4ee;}
+body.verbs-theme .verbListDescription{color:#58758a;}
+
+/* =========================
    REVIEW THEME
 ========================= */
 
@@ -1329,11 +1358,6 @@ body.review-theme .progress>div{
       Ajouter un verbe
     </h2>
 
-    <p class="hint">
-      Ajoute l'infinitif, sa description et ses six formes coréennes.
-    </p>
-
-
     <div class="row">
 
       <div class="field">
@@ -1572,10 +1596,6 @@ body.review-theme .progress>div{
     <h2 class="title">
       Révision
     </h2>
-
-    <p class="hint">
-      Choisis une catégorie ou révise tout le lexique.
-    </p>
 
     <div class="row">
 
@@ -4285,25 +4305,15 @@ document
         );
 
 
-        if(
-          button.dataset.view ===
-          "review"
-        ){
+        document.body.classList.remove(
+          "review-theme",
+          "verbs-theme"
+        );
 
-          document.body
-            .classList
-            .add(
-              "review-theme"
-            );
-
-        }else{
-
-          document.body
-            .classList
-            .remove(
-              "review-theme"
-            );
-
+        if(button.dataset.view === "review"){
+          document.body.classList.add("review-theme");
+        }else if(button.dataset.view === "verbs"){
+          document.body.classList.add("verbs-theme");
         }
 
       };
