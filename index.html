@@ -286,6 +286,27 @@ select:focus{
    CATEGORIES
 ========================= */
 
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.chipDelete{
+  border:0;
+  background:transparent;
+  color:inherit;
+  font-size:16px;
+  line-height:1;
+  cursor:pointer;
+  padding:0 2px;
+  opacity:.65;
+}
+
+.chipDelete:hover{
+  opacity:1;
+}
+
 .chips{
   display:flex;
   gap:8px;
@@ -1160,6 +1181,19 @@ body.review-theme .progress>div{
 
     </div>
 
+
+    <div
+      style="
+        margin-top:8px;
+        font-size:12px;
+        color:var(--dim);
+      ">
+
+      Après création, tu peux également enregistrer
+      directement ta propre prononciation avec le microphone.
+
+    </div>
+
   </div>
 
 
@@ -1466,20 +1500,20 @@ function render(){
   /* CATÉGORIES */
 
   $("chips").innerHTML =
-
     cats.map(category => `
-
       <span class="chip">
-
-        ${esc(category.icon || "📚")}
+        ${esc(category.icon || "")}
         ${esc(category.name)}
-
+        <button
+          type="button"
+          class="chipDelete"
+          title="Supprimer la catégorie"
+          onclick="deleteCategory('${category.id}', event)">
+          ×
+        </button>
       </span>
-
     `).join("")
-
     ||
-
     `
       <span style="color:#6f6248">
         Aucune catégorie.
@@ -1492,7 +1526,7 @@ function render(){
 
       <option value="${category.id}">
 
-        ${esc(category.icon || "📚")}
+        ${esc(category.icon || "")}
         ${esc(category.name)}
 
       </option>
@@ -2665,8 +2699,76 @@ window.playAudio =
 window.delCard =
   delCard;
 
+window.deleteCategory =
+  deleteCategory;
+
 window.selectCard =
   selectCard;
+
+
+/* =====================================================
+   SUPPRESSION CATÉGORIE
+===================================================== */
+
+async function deleteCategory(id,event){
+
+  if(event){
+    event.stopPropagation();
+  }
+
+  const category =
+    cats.find(item => item.id === id);
+
+  if(!category) return;
+
+  const linkedCards =
+    cards.filter(card => card.category_id === id);
+
+  let message =
+    `Supprimer la catégorie « ${category.name} » ?`;
+
+  if(linkedCards.length){
+    message +=
+      `\n\nCette catégorie contient ${linkedCards.length} carte(s).\n` +
+      `Les cartes seront également supprimées.`;
+  }
+
+  if(!confirm(message)) return;
+
+  try{
+
+    if(linkedCards.length){
+
+      const {error:cardsError} =
+        await sb
+          .from("flashcards")
+          .delete()
+          .eq("category_id",id);
+
+      if(cardsError) throw cardsError;
+    }
+
+    const {error} =
+      await sb
+        .from("categories")
+        .delete()
+        .eq("id",id);
+
+    if(error) throw error;
+
+    await load();
+
+    toast("Catégorie supprimée.");
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      "Impossible de supprimer la catégorie."
+    );
+  }
+}
 
 
 /* =====================================================
