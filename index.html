@@ -10,14 +10,14 @@
 
 <style>
 
-  @font-face {
-  font-family: "Rastanty Cortez";
-  src: url("./fonts/Rastanty-Cortez.otf") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+@font-face {
+  font-family:"Rastanty Cortez";
+  src:url("./fonts/Rastanty-Cortez.otf") format("woff2");
+  font-weight:normal;
+  font-style:normal;
+  font-display:swap;
 }
-  
+
 :root{
   --bg:#f7f1e0;
   --surface:#fffdf7;
@@ -182,11 +182,11 @@ button{
     color .35s ease;
 }
 
-.title {
-  font-family: "Rastanty Cortez", cursive;
-  font-size: 50px;
-  font-weight: normal;
-  margin: 0 0 5px;
+.title{
+  font-family:"Rastanty Cortez",cursive;
+  font-size:50px;
+  font-weight:normal;
+  margin:0 0 5px;
 }
 
 .hint{
@@ -286,10 +286,27 @@ select:focus{
    CATEGORIES
 ========================= */
 
+.chips{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
 .chip{
   display:inline-flex;
   align-items:center;
   gap:6px;
+
+  background:var(--surface2);
+
+  border:1px solid var(--line);
+
+  border-radius:999px;
+
+  padding:8px 12px;
+
+  font-size:13px;
 }
 
 .chipDelete{
@@ -307,200 +324,185 @@ select:focus{
   opacity:1;
 }
 
-.chips{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:14px;
-}
-
-.chip{
-  background:var(--surface2);
-
-  border:1px solid var(--line);
-
-  border-radius:999px;
-
-  padding:8px 12px;
-
-  font-size:13px;
-}
-
 /* =========================
    CARDS
 ========================= */
 
 .cards{
-   display:grid;
-   grid-template-columns:repeat(4,minmax(0,1fr));
-   gap:14px;
-   align-items:start;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  align-items:start;
 }
 
 .cardrow{
-   position:relative;
-   display:flex;
-   flex-direction:column;
-   align-items:center;
-   justify-content:flex-start;
-   gap:7px;
-   min-height:180px;
-   padding:12px 10px 14px;
-   background:#e8a9a5;
-   border:1px solid #d47f78;
-   border-radius:14px;
-   cursor:pointer;
-   overflow:visible;
-   transition:
-     transform .18s ease,
-     box-shadow .18s ease,
-     border-color .18s ease;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:7px;
+  min-height:180px;
+  padding:12px 10px 14px;
+  background:#e8a9a5;
+  border:1px solid #d47f78;
+  border-radius:14px;
+  cursor:pointer;
+  overflow:visible;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease;
 }
 
 .cardrow:hover{
-   transform:translateY(-2px);
-   box-shadow:0 10px 22px -18px #2b2420;
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px -18px #2b2420;
 }
 
 .cardrow.selected{
-   border-color:var(--red);
-   box-shadow:0 10px 25px -18px #2b2420;
+  border-color:var(--red);
+  box-shadow:0 10px 25px -18px #2b2420;
 }
 
 .cardVisual{
-   width:100%;
-   height:140px;
-   display:flex;
-   align-items:center;
-   justify-content:center;
+  width:100%;
+  height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .cardrow img,
 .cardrow .thumb{
-   width:140px;
-   height:140px;
-   border-radius:12px;
-   object-fit:cover;
-   background:#d99490;
+  width:140px;
+  height:140px;
+  border-radius:12px;
+  object-fit:cover;
+  background:#d99490;
 }
 
 .cardrow .thumb{
-   display:flex;
-   align-items:center;
-   justify-content:center;
-   font-size:34px;
-   color:#7a403c;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  color:#7a403c;
 }
 
 .cardWords{
-   width:100%;
-   text-align:center;
-   line-height:1.2;
+  width:100%;
+  text-align:center;
+  line-height:1.2;
 }
 
 .ko{
-   font-family:Georgia,serif;
-   font-weight:bold;
-   font-size:20px;
+  font-family:Georgia,serif;
+  font-weight:bold;
+  font-size:20px;
 }
 
 .fr{
-   font-size:13px;
-   color:#5a3230;
-   margin-top:3px;
+  font-size:13px;
+  color:#5a3230;
+  margin-top:3px;
 }
 
 .cardActions{
-   position:absolute;
-   inset:0;
-   display:flex;
-   align-items:center;
-   justify-content:center;
-   pointer-events:none;
-   flex-direction:row;
-   gap:8px;
-   padding:10px;
-   background:rgba(232,169,165,.92);
-   border-radius:14px;
-   opacity:0;
-   visibility:hidden;
-   pointer-events:none;
-   z-index:1000;
-   transition:
-     opacity .18s ease,
-     visibility .18s ease;
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  flex-direction:row;
+  gap:8px;
+  padding:10px;
+  background:rgba(232,169,165,.92);
+  border-radius:14px;
+  opacity:0;
+  visibility:hidden;
+  z-index:1000;
+
+  transition:
+    opacity .18s ease,
+    visibility .18s ease;
 }
 
 .cardrow.selected .cardActions{
-   opacity:1;
-   visibility:visible;
-   pointer-events:none;
+  opacity:1;
+  visibility:visible;
 }
 
 .cardrow.selected .cardActions .iconBtn{
-   pointer-events:auto;
+  pointer-events:auto;
 }
 
 .iconBtn{
-   border:1px solid var(--line);
-   background:var(--surface);
-   color:var(--text);
-   border-radius:8px;
-   width:34px;
-   height:34px;
-   padding:0;
-   font-size:16px;
-   transition:
-     background .2s ease,
-     color .2s ease,
-     transform .15s ease;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:8px;
+  width:34px;
+  height:34px;
+  padding:0;
+  font-size:16px;
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .15s ease;
 }
 
 .iconBtn:hover{
-   background:var(--surface2);
+  background:var(--surface2);
 }
 
 .iconBtn:active{
-   transform:scale(.95);
+  transform:scale(.95);
 }
 
 .iconBtn.delete{
-   color:var(--red);
+  color:var(--red);
 }
 
 .iconBtn.record{
-   color:var(--green);
+  color:var(--green);
 }
 
 .iconBtn.recording{
-   color:white;
-   background:var(--red);
-   border-color:var(--red);
-   animation:recordingPulse 1s infinite;
+  color:white;
+  background:var(--red);
+  border-color:var(--red);
+  animation:recordingPulse 1s infinite;
 }
 
 @media(max-width:900px){
-   .cards{
-      grid-template-columns:repeat(3,minmax(0,1fr));
-   }
+
+  .cards{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
 }
 
 @media(max-width:650px){
-   .cards{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
-   }
 
-   .cardrow{
-      min-height:165px;
-   }
+  .cards{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
 
-   .cardrow img,
-   .cardrow .thumb{
-      width:96px;
-      height:96px;
-   }
+  .cardrow{
+    min-height:165px;
+  }
+
+  .cardrow img,
+  .cardrow .thumb{
+    width:96px;
+    height:96px;
+  }
+
 }
+
 @keyframes recordingPulse{
 
   0%,
@@ -535,7 +537,6 @@ select:focus{
   margin-top:4px;
 
   width:100%;
-  box-sizing:border-box;
 }
 
 .editActions{
@@ -550,11 +551,8 @@ select:focus{
 .audioRow{
   display:flex;
   align-items:center;
-
   gap:8px;
-
   flex-wrap:wrap;
-
   margin-top:8px;
 }
 
@@ -566,6 +564,69 @@ select:focus{
 .recordStatus{
   font-size:12px;
   color:var(--dim);
+}
+
+/* =========================
+   VERBS
+========================= */
+
+.verbFormGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:20px;
+}
+
+.verbTense{
+  margin:22px 0 10px;
+  font-size:17px;
+}
+
+.verbItem{
+  background:var(--surface2);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px;
+}
+
+.verbItemLabel{
+  font-size:11px;
+  color:var(--dim);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.verbItemValue{
+  font-family:Georgia,serif;
+  font-size:20px;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+.verbListCard{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;
+}
+
+.verbListHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+}
+
+.verbListInfinitive{
+  font-family:Georgia,serif;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.verbListDescription{
+  color:var(--dim);
+  font-size:13px;
+  margin-top:4px;
 }
 
 /* =========================
@@ -609,8 +670,6 @@ body.review-theme{
     );
 }
 
-/* Header */
-
 body.review-theme .brand{
   color:#197044;
 }
@@ -633,8 +692,6 @@ body.review-theme .tab.active{
   color:white;
 }
 
-/* Panels */
-
 body.review-theme .panel{
   background:#f9fffb;
   border-color:#a7d1b5;
@@ -648,8 +705,6 @@ body.review-theme .hint{
   color:#557564;
 }
 
-/* Inputs */
-
 body.review-theme input,
 body.review-theme select{
   background:#e7f5ec;
@@ -661,8 +716,6 @@ body.review-theme input:focus,
 body.review-theme select:focus{
   border-color:#197044;
 }
-
-/* Buttons */
 
 body.review-theme .btn{
   background:#197044;
@@ -822,15 +875,9 @@ body.review-theme .wrong{
   color:#b52d2d;
 }
 
-/* =========================
-   REVIEW AUDIO
-========================= */
-
 .reviewAudio{
   display:flex;
-
   justify-content:center;
-
   margin:5px 0 16px;
 }
 
@@ -865,10 +912,33 @@ body.review-theme .wrong{
 
 .noAudio{
   color:#557564;
-
   font-size:12px;
-
   margin:8px 0 16px;
+}
+
+.verbReviewBadge{
+  display:inline-block;
+
+  background:var(--surface2);
+
+  border:1px solid var(--line);
+
+  border-radius:999px;
+
+  padding:7px 14px;
+
+  margin-bottom:15px;
+
+  font-size:13px;
+
+  color:var(--dim);
+}
+
+.verbReviewDescription{
+  color:var(--dim);
+  font-size:14px;
+  max-width:470px;
+  margin:-5px auto 15px;
 }
 
 /* =========================
@@ -940,7 +1010,7 @@ body.review-theme .progress>div{
 
   display:none;
 
-  z-index:10;
+  z-index:9999;
 
   white-space:nowrap;
 
@@ -982,6 +1052,19 @@ body.review-theme .progress>div{
     font-size:26px;
   }
 
+  .verbFormGrid{
+    grid-template-columns:1fr;
+  }
+
+  .tabs{
+    width:100%;
+    justify-content:center;
+  }
+
+  .tab{
+    padding:9px 11px;
+  }
+
 }
 
 </style>
@@ -1008,6 +1091,12 @@ body.review-theme .progress>div{
 
     <button
       class="tab"
+      data-view="verbs">
+      Verbes
+    </button>
+
+    <button
+      class="tab"
       data-view="review">
       Révision
     </button>
@@ -1022,8 +1111,6 @@ body.review-theme .progress>div{
 ===================================================== -->
 
 <section id="manage" class="view active">
-
-  <!-- CATÉGORIES -->
 
   <div class="panel">
 
@@ -1062,8 +1149,6 @@ body.review-theme .progress>div{
 
   </div>
 
-
-  <!-- AJOUT CARTE -->
 
   <div class="panel">
 
@@ -1153,12 +1238,10 @@ body.review-theme .progress>div{
           <button
             class="btn secondary"
             id="recordCreateAudio"
-            type="button"
-            style="
-              flex-shrink:0;
-              white-space:nowrap;
-            ">
+            type="button">
+
             🎙️ Enregistrer
+
           </button>
 
         </div>
@@ -1197,8 +1280,6 @@ body.review-theme .progress>div{
   </div>
 
 
-  <!-- MES CARTES -->
-
   <div class="panel">
 
     <h2 class="title">
@@ -1229,6 +1310,250 @@ body.review-theme .progress>div{
       id="cards"
       class="cards"
       style="margin-top:14px">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     VERBES
+===================================================== -->
+
+<section id="verbs" class="view">
+
+  <div class="panel">
+
+    <h2 class="title">
+      Ajouter un verbe
+    </h2>
+
+    <p class="hint">
+      Ajoute l'infinitif, sa description et ses six formes coréennes.
+    </p>
+
+
+    <div class="row">
+
+      <div class="field">
+
+        <label>
+          Infinitif français
+        </label>
+
+        <input
+          id="verbInfinitive"
+          placeholder="Ex. manger">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Description
+        </label>
+
+        <input
+          id="verbDescription"
+          placeholder="Ex. Prendre un repas">
+
+      </div>
+
+    </div>
+
+
+    <h3 class="verbTense">
+      Présent
+    </h3>
+
+    <div class="row">
+
+      <div class="field">
+
+        <label>
+          Courant
+        </label>
+
+        <input
+          id="verbPresentCasual"
+          placeholder="먹어요">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Formel
+        </label>
+
+        <input
+          id="verbPresentFormal"
+          placeholder="먹습니다">
+
+      </div>
+
+    </div>
+
+
+    <h3 class="verbTense">
+      Passé
+    </h3>
+
+    <div class="row">
+
+      <div class="field">
+
+        <label>
+          Courant
+        </label>
+
+        <input
+          id="verbPastCasual"
+          placeholder="먹었어요">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Formel
+        </label>
+
+        <input
+          id="verbPastFormal"
+          placeholder="먹었습니다">
+
+      </div>
+
+    </div>
+
+
+    <h3 class="verbTense">
+      Futur
+    </h3>
+
+    <div class="row">
+
+      <div class="field">
+
+        <label>
+          Courant
+        </label>
+
+        <input
+          id="verbFutureCasual"
+          placeholder="먹을 거예요">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Formel
+        </label>
+
+        <input
+          id="verbFutureFormal"
+          placeholder="먹을 것입니다">
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="row"
+      style="margin-top:20px">
+
+      <div class="field">
+
+        <label>
+          Image
+        </label>
+
+        <input
+          id="verbImage"
+          type="file"
+          accept="image/*">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Audio
+        </label>
+
+        <div
+          style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+            width:100%;
+          ">
+
+          <input
+            id="verbAudio"
+            type="file"
+            accept="audio/*"
+            style="
+              flex:1;
+              min-width:0;
+            ">
+
+          <button
+            class="btn secondary"
+            id="recordVerbAudio"
+            type="button">
+
+            🎙️ Enregistrer
+
+          </button>
+
+        </div>
+
+        <div
+          id="verbAudioStatus"
+          class="recordStatus"
+          style="margin-top:5px;">
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="btn"
+      id="addVerb"
+      style="margin-top:18px;">
+
+      Ajouter le verbe
+
+    </button>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h2 class="title">
+      Mes verbes
+    </h2>
+
+    <div
+      id="verbsList"
+      style="
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      ">
     </div>
 
   </div>
@@ -1347,6 +1672,7 @@ const sb =
 
 let cats = [];
 let cards = [];
+let verbs = [];
 
 let deck = [];
 let index = 0;
@@ -1360,8 +1686,17 @@ let answered = false;
 
 let recorder = null;
 let recordedChunks = [];
-
 let recordingCardId = null;
+
+let createRecorder = null;
+let createRecordedChunks = [];
+let createAudioFile = null;
+
+let verbRecorder = null;
+let verbRecordedChunks = [];
+let verbAudioFile = null;
+
+let reviewType = "cards";
 
 
 /* =====================================================
@@ -1374,15 +1709,21 @@ const $ = id =>
 
 function toast(message){
 
-  const element = $("toast");
+  const element =
+    $("toast");
 
-  element.textContent = message;
+  element.textContent =
+    message;
 
-  element.classList.add("show");
+  element.classList.add(
+    "show"
+  );
 
   setTimeout(() => {
 
-    element.classList.remove("show");
+    element.classList.remove(
+      "show"
+    );
 
   },2500);
 
@@ -1409,7 +1750,9 @@ function esc(value){
 function shuffle(array){
 
   return [...array]
-    .sort(() => Math.random() - .5);
+    .sort(
+      () => Math.random() - .5
+    );
 
 }
 
@@ -1427,8 +1770,10 @@ function norm(value){
 function catName(id){
 
   return cats.find(
-    category => category.id === id
-  )?.name || "Sans catégorie";
+    category =>
+      category.id === id
+  )?.name ||
+  "Sans catégorie";
 
 }
 
@@ -1441,7 +1786,8 @@ async function load(){
 
   const [
     categoriesResult,
-    cardsResult
+    cardsResult,
+    verbsResult
   ] = await Promise.all([
 
     sb
@@ -1454,7 +1800,19 @@ async function load(){
       .select("*")
       .order(
         "created_at",
-        {ascending:false}
+        {
+          ascending:false
+        }
+      ),
+
+    sb
+      .from("verbs")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
       )
 
   ]);
@@ -1462,12 +1820,14 @@ async function load(){
 
   if(
     categoriesResult.error ||
-    cardsResult.error
+    cardsResult.error ||
+    verbsResult.error
   ){
 
     console.error(
       categoriesResult.error,
-      cardsResult.error
+      cardsResult.error,
+      verbsResult.error
     );
 
     toast(
@@ -1485,8 +1845,13 @@ async function load(){
   cards =
     cardsResult.data || [];
 
+  verbs =
+    verbsResult.data || [];
+
 
   render();
+
+  renderVerbs();
 
 }
 
@@ -1497,65 +1862,84 @@ async function load(){
 
 function render(){
 
-  /* CATÉGORIES */
-
   $("chips").innerHTML =
     cats.map(category => `
+
       <span class="chip">
+
         ${esc(category.name)}
+
         <button
           type="button"
           class="chipDelete"
           title="Supprimer la catégorie"
           onclick="deleteCategory('${category.id}', event)">
+
           ×
+
         </button>
+
       </span>
+
     `).join("")
+
     ||
+
     `
-      <span style="color:#6f6248">
+
+      <span
+        style="color:#6f6248">
+
         Aucune catégorie.
+
       </span>
+
     `;
 
 
-  const options = cats
-    .map(category => `
+  const options =
+    cats
+      .map(category => `
 
-      <option value="${category.id}">
+        <option
+          value="${category.id}">
 
-        ${esc(category.name)}
+          ${esc(category.name)}
 
-      </option>
+        </option>
 
-    `)
-    .join("");
+      `)
+      .join("");
 
-
-  /* SELECT AJOUT CARTE */
 
   $("catSelect").innerHTML =
     options ||
 
     `
+
       <option value="">
+
         Crée d'abord une catégorie
+
       </option>
+
     `;
 
-
-  /* FILTRE */
 
   const currentFilter =
     $("filter").value;
 
+
   $("filter").innerHTML =
 
     `
+
       <option value="">
+
         Toutes les catégories
+
       </option>
+
     ` +
 
     options;
@@ -1565,28 +1949,41 @@ function render(){
     currentFilter;
 
 
-  /* RÉVISION */
-
   $("reviewCat").innerHTML =
 
     `
+
       <option value="">
+
         🌐 Lexique global
+
       </option>
+
+      <option value="__VERBS__">
+
+        🔵 Verbes
+
+      </option>
+
     ` +
 
     options;
 
 
-  /* CARTES */
-
   const filteredCards =
     currentFilter
-      ? cards.filter(
-          card =>
-            card.category_id === currentFilter
-        )
-      : cards;
+
+      ?
+
+    cards.filter(
+      card =>
+        card.category_id ===
+        currentFilter
+    )
+
+      :
+
+    cards;
 
 
   $("cards").innerHTML =
@@ -1598,6 +1995,7 @@ function render(){
     ||
 
     `
+
       <div
         style="
           text-align:center;
@@ -1608,13 +2006,14 @@ function render(){
         Aucune carte.
 
       </div>
+
     `;
 
 }
 
 
 /* =====================================================
-   HTML D'UNE CARTE
+   HTML CARTE
 ===================================================== */
 
 function cardHtml(card){
@@ -1626,7 +2025,6 @@ function cardHtml(card){
       data-card-id="${card.id}"
       onclick="selectCard('${card.id}')">
 
-      <!-- IMAGE -->
 
       <div class="cardVisual">
 
@@ -1636,43 +2034,53 @@ function cardHtml(card){
           ?
 
           `
+
             <img
               src="${esc(card.image_url)}"
-              alt="${esc(card.french || card.korean)}">
+              alt="${esc(
+                card.french ||
+                card.korean
+              )}">
+
           `
 
           :
 
           `
+
             <div class="thumb">
+
               🖼️
+
             </div>
+
           `
         }
 
       </div>
 
 
-      <!-- MOTS -->
-
       <div class="cardWords">
 
         <div class="ko">
+
           ${esc(card.korean)}
+
         </div>
 
         <div class="fr">
+
           ${esc(card.french)}
+
         </div>
 
       </div>
 
 
-      <!-- ACTIONS -->
-
       <div
         class="cardActions"
         onclick="event.stopPropagation()">
+
 
         ${
           card.audio_url
@@ -1680,45 +2088,59 @@ function cardHtml(card){
           ?
 
           `
+
             <button
               class="iconBtn"
               title="Écouter l'audio"
-              onclick="playAudio('${esc(card.audio_url)}')">
+              onclick="playAudio('${esc(
+                card.audio_url
+              )}')">
+
               🔊
+
             </button>
+
           `
 
           :
 
           ""
+
         }
+
 
         <button
           class="iconBtn record"
           id="record-btn-${card.id}"
           title="Enregistrer ma voix"
           onclick="startRecording('${card.id}')">
+
           🎙️
+
         </button>
+
 
         <button
           class="iconBtn"
           title="Modifier"
           onclick="editCard('${card.id}')">
+
           ✏️
+
         </button>
+
 
         <button
           class="iconBtn delete"
           title="Supprimer"
           onclick="delCard('${card.id}')">
+
           🗑️
+
         </button>
 
       </div>
 
-
-      <!-- EDITION -->
 
       <div
         id="edit-${card.id}"
@@ -1736,25 +2158,39 @@ function cardHtml(card){
 function selectCard(id){
 
   document
-    .querySelectorAll(".cardrow.selected")
+    .querySelectorAll(
+      ".cardrow.selected"
+    )
     .forEach(card => {
 
-      if(card.dataset.cardId !== id){
-        card.classList.remove("selected");
+      if(
+        card.dataset.cardId !== id
+      ){
+
+        card.classList.remove(
+          "selected"
+        );
+
       }
 
     });
 
-  const card = document.querySelector(
-    `.cardrow[data-card-id="${id}"]`
-  );
+
+  const card =
+    document.querySelector(
+      `.cardrow[data-card-id="${id}"]`
+    );
+
 
   if(card){
-    card.classList.toggle("selected");
+
+    card.classList.toggle(
+      "selected"
+    );
+
   }
 
 }
-
 
 
 /* =====================================================
@@ -1765,8 +2201,10 @@ function editCard(id){
 
   const card =
     cards.find(
-      item => item.id === id
+      item =>
+        item.id === id
     );
+
 
   if(!card) return;
 
@@ -1775,7 +2213,9 @@ function editCard(id){
     $("edit-" + id);
 
 
-  box.classList.remove("hidden");
+  box.classList.remove(
+    "hidden"
+  );
 
 
   box.innerHTML = `
@@ -1796,12 +2236,13 @@ function editCard(id){
               <option
                 value="${category.id}"
                 ${
-                  category.id === card.category_id
+                  category.id ===
+                  card.category_id
                     ? "selected"
                     : ""
                 }>
 
-                        ${esc(category.name)}
+                ${esc(category.name)}
 
               </option>
 
@@ -1883,22 +2324,32 @@ function editCard(id){
         ?
 
         `
+
           <audio
             controls
-            src="${esc(card.audio_url)}">
+            src="${esc(
+              card.audio_url
+            )}">
           </audio>
 
           <span class="recordStatus">
+
             Audio actuel
+
           </span>
+
         `
 
         :
 
         `
+
           <span class="recordStatus">
+
             Aucun audio
+
           </span>
+
         `
       }
 
@@ -1953,14 +2404,18 @@ function cancelEdit(id){
     $("edit-" + id);
 
   if(box){
-    box.classList.add("hidden");
+
+    box.classList.add(
+      "hidden"
+    );
+
   }
 
 }
 
 
 /* =====================================================
-   UPLOAD SUPABASE
+   UPLOAD
 ===================================================== */
 
 async function uploadFile(
@@ -1996,7 +2451,9 @@ async function uploadFile(
 
 
   if(upload.error){
+
     throw upload.error;
+
   }
 
 
@@ -2011,15 +2468,17 @@ async function uploadFile(
 
 
 /* =====================================================
-   SAUVEGARDER MODIFICATION
+   SAVE EDIT
 ===================================================== */
 
 async function saveEdit(id){
 
   const card =
     cards.find(
-      item => item.id === id
+      item =>
+        item.id === id
     );
+
 
   if(!card) return;
 
@@ -2036,6 +2495,7 @@ async function saveEdit(id){
     $("editFr-" + id)
       .value
       .trim();
+
 
   const imageFile =
     $("editImage-" + id)
@@ -2062,10 +2522,12 @@ async function saveEdit(id){
   try{
 
     let image_url =
-      card.image_url || null;
+      card.image_url ||
+      null;
 
     let audio_url =
-      card.audio_url || null;
+      card.audio_url ||
+      null;
 
 
     if(imageFile){
@@ -2094,21 +2556,29 @@ async function saveEdit(id){
       await sb
         .from("flashcards")
         .update({
+
           category_id,
           korean,
           french,
           image_url,
           audio_url
+
         })
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
 
     if(error){
+
       throw error;
+
     }
 
 
     await load();
+
 
     toast(
       "Carte modifiée ✨"
@@ -2129,34 +2599,42 @@ async function saveEdit(id){
 
 
 /* =====================================================
-   ENREGISTREMENT AUDIO — CRÉATION DE CARTE
+   AUDIO CRÉATION CARTE
 ===================================================== */
-
-let createRecorder = null;
-let createRecordedChunks = [];
-let createAudioFile = null;
 
 async function startCreateRecording(){
 
-  const button = $("recordCreateAudio");
-  const status = $("createAudioStatus");
+  const button =
+    $("recordCreateAudio");
+
+  const status =
+    $("createAudioStatus");
+
 
   if(
     createRecorder &&
-    createRecorder.state === "recording"
+    createRecorder.state ===
+    "recording"
   ){
+
     createRecorder.stop();
+
     return;
+
   }
+
 
   if(
     !navigator.mediaDevices ||
     !navigator.mediaDevices.getUserMedia
   ){
+
     return toast(
       "Ton navigateur ne permet pas l'enregistrement audio."
     );
+
   }
+
 
   try{
 
@@ -2165,143 +2643,216 @@ async function startCreateRecording(){
         audio:true
       });
 
+
     createRecordedChunks = [];
 
+
     let mimeType = "";
+
 
     if(
       MediaRecorder.isTypeSupported(
         "audio/webm;codecs=opus"
       )
     ){
-      mimeType = "audio/webm;codecs=opus";
+
+      mimeType =
+        "audio/webm;codecs=opus";
+
     }
+
     else if(
-      MediaRecorder.isTypeSupported("audio/webm")
+      MediaRecorder.isTypeSupported(
+        "audio/webm"
+      )
     ){
-      mimeType = "audio/webm";
+
+      mimeType =
+        "audio/webm";
+
     }
+
     else if(
-      MediaRecorder.isTypeSupported("audio/mp4")
+      MediaRecorder.isTypeSupported(
+        "audio/mp4"
+      )
     ){
-      mimeType = "audio/mp4";
+
+      mimeType =
+        "audio/mp4";
+
     }
+
 
     createRecorder =
       mimeType
-      ? new MediaRecorder(stream,{mimeType})
-      : new MediaRecorder(stream);
 
-    if(button){
-      button.textContent = "⏹️ Arrêter";
-      button.classList.add("recording");
-    }
+        ?
 
-    if(status){
-      status.textContent = "🔴 Enregistrement…";
-    }
+      new MediaRecorder(
+        stream,
+        {
+          mimeType
+        }
+      )
 
-    toast("🎙️ Enregistrement en cours…");
+        :
+
+      new MediaRecorder(
+        stream
+      );
+
+
+    button.textContent =
+      "⏹️ Arrêter";
+
+    button.classList.add(
+      "recording"
+    );
+
+
+    status.textContent =
+      "🔴 Enregistrement…";
+
+
+    toast(
+      "🎙️ Enregistrement en cours…"
+    );
+
 
     createRecorder.ondataavailable =
       event => {
+
         if(event.data.size){
-          createRecordedChunks.push(event.data);
+
+          createRecordedChunks.push(
+            event.data
+          );
+
         }
+
       };
+
 
     createRecorder.onstop =
       () => {
 
         stream
           .getTracks()
-          .forEach(track => track.stop());
+          .forEach(
+            track =>
+              track.stop()
+          );
 
-        if(!createRecordedChunks.length){
-          if(status) status.textContent = "";
+
+        if(
+          !createRecordedChunks.length
+        ){
+
+          status.textContent = "";
+
           createRecorder = null;
+
           return;
+
         }
+
 
         const finalType =
           createRecorder.mimeType ||
           mimeType ||
           "audio/webm";
 
+
         const extension =
           finalType.includes("mp4")
             ? "mp4"
             : "webm";
 
+
         const blob =
           new Blob(
             createRecordedChunks,
-            {type:finalType}
+            {
+              type:finalType
+            }
           );
+
 
         createAudioFile =
           new File(
             [blob],
             `recording-${Date.now()}.${extension}`,
-            {type:finalType}
+            {
+              type:finalType
+            }
           );
 
-        const audioInput = $("audio");
-        if(audioInput){
-          audioInput.value = "";
-        }
 
-        if(button){
-          button.textContent = "🎙️ Refaire l'enregistrement";
-          button.classList.remove("recording");
-        }
+        $("audio").value = "";
 
-        if(status){
-          status.textContent = "✅ Audio enregistré";
-        }
 
-        toast("🎉 Audio prêt pour la création de la carte.");
+        button.textContent =
+          "🎙️ Refaire l'enregistrement";
+
+
+        button.classList.remove(
+          "recording"
+        );
+
+
+        status.textContent =
+          "✅ Audio enregistré";
+
+
+        toast(
+          "🎉 Audio prêt pour la création de la carte."
+        );
+
 
         createRecordedChunks = [];
+
         createRecorder = null;
+
       };
 
+
     createRecorder.start();
+
 
   }catch(error){
 
     console.error(error);
 
-    if(button){
-      button.textContent = "🎙️ Enregistrer ma voix";
-      button.classList.remove("recording");
-    }
+    button.textContent =
+      "🎙️ Enregistrer ma voix";
 
-    if(status){
-      status.textContent = "";
-    }
+    button.classList.remove(
+      "recording"
+    );
+
+    status.textContent = "";
+
 
     toast(
       "Impossible d'accéder au microphone. Autorise le micro dans ton navigateur."
     );
+
   }
+
 }
 
 
 /* =====================================================
-   ENREGISTREMENT MICROPHONE
+   AUDIO MICRO CARTE
 ===================================================== */
 
 async function startRecording(cardId){
 
-  /*
-    Si un enregistrement est déjà en cours,
-    le clic arrête l'enregistrement.
-  */
-
   if(
     recorder &&
-    recorder.state === "recording"
+    recorder.state ===
+    "recording"
   ){
 
     recorder.stop();
@@ -2326,11 +2877,9 @@ async function startRecording(cardId){
   try{
 
     const stream =
-      await navigator
-        .mediaDevices
-        .getUserMedia({
-          audio:true
-        });
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
 
 
     recordedChunks = [];
@@ -2338,11 +2887,6 @@ async function startRecording(cardId){
     recordingCardId =
       cardId;
 
-
-    /*
-      Choix automatique du format
-      selon les capacités du navigateur.
-    */
 
     let mimeType = "";
 
@@ -2384,23 +2928,21 @@ async function startRecording(cardId){
     recorder =
       mimeType
 
-      ?
+        ?
 
       new MediaRecorder(
         stream,
-        {mimeType}
+        {
+          mimeType
+        }
       )
 
-      :
+        :
 
       new MediaRecorder(
         stream
       );
 
-
-    /*
-      Bouton micro de la liste.
-    */
 
     const button =
       $("record-btn-" + cardId);
@@ -2420,11 +2962,6 @@ async function startRecording(cardId){
 
     }
 
-
-    /*
-      Bouton présent dans la fiche
-      d'édition si elle est ouverte.
-    */
 
     const status =
       $("record-status-" + cardId);
@@ -2460,10 +2997,6 @@ async function startRecording(cardId){
     recorder.onstop =
       async () => {
 
-        /*
-          Arrêt du microphone.
-        */
-
         stream
           .getTracks()
           .forEach(
@@ -2471,10 +3004,6 @@ async function startRecording(cardId){
               track.stop()
           );
 
-
-        /*
-          Remise en état du bouton.
-        */
 
         if(button){
 
@@ -2512,10 +3041,6 @@ async function startRecording(cardId){
 
         try{
 
-          /*
-            Détermination du type final.
-          */
-
           const finalType =
             recorder.mimeType ||
             mimeType ||
@@ -2527,10 +3052,6 @@ async function startRecording(cardId){
               ? "mp4"
               : "webm";
 
-
-          /*
-            Création du fichier.
-          */
 
           const blob =
             new Blob(
@@ -2556,10 +3077,6 @@ async function startRecording(cardId){
           );
 
 
-          /*
-            Upload Supabase Storage.
-          */
-
           const url =
             await uploadFile(
               "vocabulary-audio",
@@ -2567,27 +3084,24 @@ async function startRecording(cardId){
             );
 
 
-          /*
-            Association avec la carte.
-          */
-
           const {error} =
             await sb
               .from("flashcards")
               .update({
                 audio_url:url
               })
-              .eq("id",cardId);
+              .eq(
+                "id",
+                cardId
+              );
 
 
           if(error){
+
             throw error;
+
           }
 
-
-          /*
-            Recharge toutes les cartes.
-          */
 
           await load();
 
@@ -2610,28 +3124,22 @@ async function startRecording(cardId){
 
         recordedChunks = [];
 
-        recordingCardId =
-          null;
+        recordingCardId = null;
 
-        recorder =
-          null;
+        recorder = null;
 
       };
 
 
-    /*
-      Démarrage.
-    */
-
     recorder.start();
+
 
   }catch(error){
 
     console.error(error);
 
     toast(
-      "Impossible d'accéder au microphone. " +
-      "Autorise le micro dans ton navigateur."
+      "Impossible d'accéder au microphone. Autorise le micro dans ton navigateur."
     );
 
   }
@@ -2640,18 +3148,16 @@ async function startRecording(cardId){
 
 
 /* =====================================================
-   LECTURE AUDIO
+   PLAY AUDIO
 ===================================================== */
 
 function playAudio(url){
 
   if(!url){
 
-    toast(
+    return toast(
       "Aucun audio disponible."
     );
-
-    return;
 
   }
 
@@ -2675,87 +3181,103 @@ function playAudio(url){
 
 
 /* =====================================================
-   EXPOSITION DES FONCTIONS
+   CATÉGORIE
 ===================================================== */
 
-window.editCard =
-  editCard;
-
-window.cancelEdit =
-  cancelEdit;
-
-window.saveEdit =
-  saveEdit;
-
-window.startRecording =
-  startRecording;
-
-window.playAudio =
-  playAudio;
-
-window.delCard =
-  delCard;
-
-window.deleteCategory =
-  deleteCategory;
-
-window.selectCard =
-  selectCard;
-
-
-/* =====================================================
-   SUPPRESSION CATÉGORIE
-===================================================== */
-
-async function deleteCategory(id,event){
+async function deleteCategory(
+  id,
+  event
+){
 
   if(event){
+
     event.stopPropagation();
+
   }
 
+
   const category =
-    cats.find(item => item.id === id);
+    cats.find(
+      item =>
+        item.id === id
+    );
+
 
   if(!category) return;
 
+
   const linkedCards =
-    cards.filter(card => card.category_id === id);
+    cards.filter(
+      card =>
+        card.category_id === id
+    );
+
 
   let message =
     `Supprimer la catégorie « ${category.name} » ?`;
 
+
   if(linkedCards.length){
+
     message +=
       `\n\nCette catégorie contient ${linkedCards.length} carte(s).\n` +
       `Les cartes seront également supprimées.`;
+
   }
 
+
   if(!confirm(message)) return;
+
 
   try{
 
     if(linkedCards.length){
 
-      const {error:cardsError} =
+      const {
+        error:cardsError
+      } =
         await sb
           .from("flashcards")
           .delete()
-          .eq("category_id",id);
+          .eq(
+            "category_id",
+            id
+          );
 
-      if(cardsError) throw cardsError;
+
+      if(cardsError){
+
+        throw cardsError;
+
+      }
+
     }
+
 
     const {error} =
       await sb
         .from("categories")
         .delete()
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
-    if(error) throw error;
+
+    if(error){
+
+      throw error;
+
+    }
+
 
     await load();
 
-    toast("Catégorie supprimée.");
+
+    toast(
+      "Catégorie supprimée."
+    );
+
 
   }catch(error){
 
@@ -2764,7 +3286,9 @@ async function deleteCategory(id,event){
     toast(
       "Impossible de supprimer la catégorie."
     );
+
   }
+
 }
 
 
@@ -2809,8 +3333,7 @@ $("addCat").onclick =
     }
 
 
-    $("catName").value =
-      "";
+    $("catName").value = "";
 
 
     await load();
@@ -2860,7 +3383,8 @@ $("addCard").onclick =
         .files[0];
 
     const audioFile =
-      createAudioFile || selectedAudioFile;
+      createAudioFile ||
+      selectedAudioFile;
 
 
     if(
@@ -2878,16 +3402,9 @@ $("addCard").onclick =
 
     try{
 
-      let image_url =
-        null;
+      let image_url = null;
+      let audio_url = null;
 
-      let audio_url =
-        null;
-
-
-      /*
-        Image éventuelle.
-      */
 
       if(imageFile){
 
@@ -2900,10 +3417,6 @@ $("addCard").onclick =
       }
 
 
-      /*
-        Audio éventuel.
-      */
-
       if(audioFile){
 
         audio_url =
@@ -2915,66 +3428,49 @@ $("addCard").onclick =
       }
 
 
-      /*
-        Création carte.
-      */
-
       const {error} =
         await sb
           .from("flashcards")
           .insert({
 
             category_id,
-
             korean,
-
             french,
-
             image_url,
-
             audio_url
 
           });
 
 
       if(error){
+
         throw error;
+
       }
 
 
-      /*
-        Nettoyage formulaire.
-      */
+      $("ko").value = "";
+      $("fr").value = "";
+      $("image").value = "";
+      $("audio").value = "";
 
-      $("ko").value =
-        "";
-
-      $("fr").value =
-        "";
-
-      $("image").value =
-        "";
-
-      $("audio").value =
-        "";
 
       createAudioFile = null;
 
-      const createAudioStatus =
-        $("createAudioStatus");
 
-      if(createAudioStatus){
-        createAudioStatus.textContent = "";
-      }
+      $("createAudioStatus")
+        .textContent = "";
 
-      const recordCreateAudio =
-        $("recordCreateAudio");
 
-      if(recordCreateAudio){
-        recordCreateAudio.textContent =
+      $("recordCreateAudio")
+        .textContent =
           "🎙️ Enregistrer ma voix";
-        recordCreateAudio.classList.remove("recording");
-      }
+
+
+      $("recordCreateAudio")
+        .classList.remove(
+          "recording"
+        );
 
 
       await load();
@@ -2998,13 +3494,9 @@ $("addCard").onclick =
   };
 
 
-const recordCreateAudio =
-  $("recordCreateAudio");
-
-if(recordCreateAudio){
-  recordCreateAudio.onclick =
+$("recordCreateAudio")
+  .onclick =
     startCreateRecording;
-}
 
 
 /* =====================================================
@@ -3028,7 +3520,10 @@ async function delCard(id){
     await sb
       .from("flashcards")
       .delete()
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if(error){
@@ -3051,7 +3546,704 @@ async function delCard(id){
 
 
 /* =====================================================
-   CHANGEMENT D'ONGLET
+   VERBES — AFFICHAGE
+===================================================== */
+
+function verbFormHtml(
+  tense,
+  register,
+  value
+){
+
+  if(!value) return "";
+
+
+  return `
+
+    <div class="verbItem">
+
+      <div class="verbItemLabel">
+
+        ${esc(tense)}
+        ·
+        ${esc(register)}
+
+      </div>
+
+      <div class="verbItemValue">
+
+        ${esc(value)}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function renderVerbs(){
+
+  const container =
+    $("verbsList");
+
+
+  if(!container) return;
+
+
+  if(!verbs.length){
+
+    container.innerHTML = `
+
+      <div
+        style="
+          text-align:center;
+          color:var(--dim);
+          padding:18px;
+        ">
+
+        Aucun verbe.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    verbs
+      .map(
+        verb => `
+
+          <div class="verbListCard">
+
+            <div class="verbListHeader">
+
+              <div>
+
+                <div class="verbListInfinitive">
+
+                  ${esc(
+                    verb.infinitive
+                  )}
+
+                </div>
+
+                ${
+                  verb.description
+
+                    ?
+
+                  `
+
+                    <div
+                      class="verbListDescription">
+
+                      ${esc(
+                        verb.description
+                      )}
+
+                    </div>
+
+                  `
+
+                    :
+
+                  ""
+
+                }
+
+              </div>
+
+
+              <button
+                class="iconBtn delete"
+                onclick="deleteVerb('${verb.id}')"
+                title="Supprimer">
+
+                🗑️
+
+              </button>
+
+            </div>
+
+
+            <div class="verbFormGrid">
+
+              ${verbFormHtml(
+                "Présent",
+                "Courant",
+                verb.present_casual
+              )}
+
+              ${verbFormHtml(
+                "Présent",
+                "Formel",
+                verb.present_formal
+              )}
+
+              ${verbFormHtml(
+                "Passé",
+                "Courant",
+                verb.past_casual
+              )}
+
+              ${verbFormHtml(
+                "Passé",
+                "Formel",
+                verb.past_formal
+              )}
+
+              ${verbFormHtml(
+                "Futur",
+                "Courant",
+                verb.future_casual
+              )}
+
+              ${verbFormHtml(
+                "Futur",
+                "Formel",
+                verb.future_formal
+              )}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+/* =====================================================
+   VERBES — ENREGISTREMENT AUDIO
+===================================================== */
+
+async function startVerbRecording(){
+
+  const button =
+    $("recordVerbAudio");
+
+  const status =
+    $("verbAudioStatus");
+
+
+  if(
+    verbRecorder &&
+    verbRecorder.state ===
+    "recording"
+  ){
+
+    verbRecorder.stop();
+
+    return;
+
+  }
+
+
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ){
+
+    return toast(
+      "Ton navigateur ne permet pas l'enregistrement audio."
+    );
+
+  }
+
+
+  try{
+
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
+
+
+    verbRecordedChunks = [];
+
+
+    let mimeType = "";
+
+
+    if(
+      MediaRecorder.isTypeSupported(
+        "audio/webm;codecs=opus"
+      )
+    ){
+
+      mimeType =
+        "audio/webm;codecs=opus";
+
+    }
+
+    else if(
+      MediaRecorder.isTypeSupported(
+        "audio/webm"
+      )
+    ){
+
+      mimeType =
+        "audio/webm";
+
+    }
+
+    else if(
+      MediaRecorder.isTypeSupported(
+        "audio/mp4"
+      )
+    ){
+
+      mimeType =
+        "audio/mp4";
+
+    }
+
+
+    verbRecorder =
+      mimeType
+
+        ?
+
+      new MediaRecorder(
+        stream,
+        {
+          mimeType
+        }
+      )
+
+        :
+
+      new MediaRecorder(
+        stream
+      );
+
+
+    button.textContent =
+      "⏹️ Arrêter";
+
+
+    button.classList.add(
+      "recording"
+    );
+
+
+    status.textContent =
+      "🔴 Enregistrement…";
+
+
+    toast(
+      "🎙️ Enregistrement en cours…"
+    );
+
+
+    verbRecorder.ondataavailable =
+      event => {
+
+        if(event.data.size){
+
+          verbRecordedChunks.push(
+            event.data
+          );
+
+        }
+
+      };
+
+
+    verbRecorder.onstop =
+      () => {
+
+        stream
+          .getTracks()
+          .forEach(
+            track =>
+              track.stop()
+          );
+
+
+        if(
+          !verbRecordedChunks.length
+        ){
+
+          status.textContent = "";
+
+          verbRecorder = null;
+
+          return;
+
+        }
+
+
+        const finalType =
+          verbRecorder.mimeType ||
+          mimeType ||
+          "audio/webm";
+
+
+        const extension =
+          finalType.includes("mp4")
+            ? "mp4"
+            : "webm";
+
+
+        const blob =
+          new Blob(
+            verbRecordedChunks,
+            {
+              type:finalType
+            }
+          );
+
+
+        verbAudioFile =
+          new File(
+            [blob],
+            `verb-${Date.now()}.${extension}`,
+            {
+              type:finalType
+            }
+          );
+
+
+        $("verbAudio").value = "";
+
+
+        button.textContent =
+          "🎙️ Refaire";
+
+
+        button.classList.remove(
+          "recording"
+        );
+
+
+        status.textContent =
+          "✅ Audio enregistré";
+
+
+        verbRecordedChunks = [];
+
+        verbRecorder = null;
+
+
+        toast(
+          "🎉 Audio prêt."
+        );
+
+      };
+
+
+    verbRecorder.start();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      "Impossible d'accéder au microphone."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   VERBES — AJOUT
+===================================================== */
+
+$("addVerb").onclick =
+  async () => {
+
+    const infinitive =
+      $("verbInfinitive")
+        .value
+        .trim();
+
+    const description =
+      $("verbDescription")
+        .value
+        .trim();
+
+
+    const present_casual =
+      $("verbPresentCasual")
+        .value
+        .trim();
+
+    const present_formal =
+      $("verbPresentFormal")
+        .value
+        .trim();
+
+
+    const past_casual =
+      $("verbPastCasual")
+        .value
+        .trim();
+
+    const past_formal =
+      $("verbPastFormal")
+        .value
+        .trim();
+
+
+    const future_casual =
+      $("verbFutureCasual")
+        .value
+        .trim();
+
+    const future_formal =
+      $("verbFutureFormal")
+        .value
+        .trim();
+
+
+    const imageFile =
+      $("verbImage")
+        .files[0];
+
+
+    const selectedAudioFile =
+      $("verbAudio")
+        .files[0];
+
+
+    const audioFile =
+      verbAudioFile ||
+      selectedAudioFile;
+
+
+    if(
+      !infinitive ||
+      !present_casual ||
+      !present_formal ||
+      !past_casual ||
+      !past_formal ||
+      !future_casual ||
+      !future_formal
+    ){
+
+      return toast(
+        "Remplis l'infinitif et les 6 formes du verbe."
+      );
+
+    }
+
+
+    try{
+
+      let image_url = null;
+      let audio_url = null;
+
+
+      if(imageFile){
+
+        image_url =
+          await uploadFile(
+            "vocabulary-images",
+            imageFile
+          );
+
+      }
+
+
+      if(audioFile){
+
+        audio_url =
+          await uploadFile(
+            "vocabulary-audio",
+            audioFile
+          );
+
+      }
+
+
+      const {error} =
+        await sb
+          .from("verbs")
+          .insert({
+
+            infinitive,
+            description,
+
+            present_casual,
+            present_formal,
+
+            past_casual,
+            past_formal,
+
+            future_casual,
+            future_formal,
+
+            image_url,
+            audio_url
+
+          });
+
+
+      if(error){
+
+        throw error;
+
+      }
+
+
+      [
+        "verbInfinitive",
+        "verbDescription",
+        "verbPresentCasual",
+        "verbPresentFormal",
+        "verbPastCasual",
+        "verbPastFormal",
+        "verbFutureCasual",
+        "verbFutureFormal"
+      ].forEach(
+        id => {
+          $(id).value = "";
+        }
+      );
+
+
+      $("verbImage").value = "";
+      $("verbAudio").value = "";
+
+
+      verbAudioFile = null;
+
+
+      $("verbAudioStatus")
+        .textContent = "";
+
+
+      $("recordVerbAudio")
+        .textContent =
+          "🎙️ Enregistrer";
+
+
+      $("recordVerbAudio")
+        .classList.remove(
+          "recording"
+        );
+
+
+      await load();
+
+
+      toast(
+        "Verbe ajouté ✨"
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      toast(
+        "Erreur lors de la création du verbe."
+      );
+
+    }
+
+  };
+
+
+$("recordVerbAudio")
+  .onclick =
+    startVerbRecording;
+
+
+/* =====================================================
+   VERBES — SUPPRESSION
+===================================================== */
+
+async function deleteVerb(id){
+
+  if(
+    !confirm(
+      "Supprimer ce verbe ?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const {error} =
+    await sb
+      .from("verbs")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    return toast(
+      "Impossible de supprimer le verbe."
+    );
+
+  }
+
+
+  await load();
+
+
+  toast(
+    "Verbe supprimé."
+  );
+
+}
+
+
+/* =====================================================
+   EXPOSITION
+===================================================== */
+
+window.editCard =
+  editCard;
+
+window.cancelEdit =
+  cancelEdit;
+
+window.saveEdit =
+  saveEdit;
+
+window.startRecording =
+  startRecording;
+
+window.playAudio =
+  playAudio;
+
+window.delCard =
+  delCard;
+
+window.deleteCategory =
+  deleteCategory;
+
+window.selectCard =
+  selectCard;
+
+window.deleteVerb =
+  deleteVerb;
+
+
+/* =====================================================
+   CHANGEMENT ONGLET
 ===================================================== */
 
 document
@@ -3061,31 +4253,21 @@ document
     button.onclick =
       () => {
 
-        /*
-          Onglets actifs.
-        */
-
         document
           .querySelectorAll(".tab")
-          .forEach(
-            item =>
-              item.classList.remove(
-                "active"
-              )
+          .forEach(item =>
+            item.classList.remove(
+              "active"
+            )
           );
 
 
-        /*
-          Vues.
-        */
-
         document
           .querySelectorAll(".view")
-          .forEach(
-            item =>
-              item.classList.remove(
-                "active"
-              )
+          .forEach(item =>
+            item.classList.remove(
+              "active"
+            )
           );
 
 
@@ -3103,11 +4285,6 @@ document
         );
 
 
-        /*
-          Thème vert uniquement
-          pour l'onglet Révision.
-        */
-
         if(
           button.dataset.view ===
           "review"
@@ -3115,13 +4292,17 @@ document
 
           document.body
             .classList
-            .add("review-theme");
+            .add(
+              "review-theme"
+            );
 
         }else{
 
           document.body
             .classList
-            .remove("review-theme");
+            .remove(
+              "review-theme"
+            );
 
         }
 
@@ -3131,7 +4312,7 @@ document
 
 
 /* =====================================================
-   DÉMARRER UNE RÉVISION
+   DÉMARRER RÉVISION
 ===================================================== */
 
 $("start").onclick =
@@ -3141,43 +4322,170 @@ $("start").onclick =
       $("reviewCat").value;
 
 
-    const source =
-      categoryId
+    /*
+      =========================
+      VERBES
+      =========================
+    */
 
-      ?
+    if(
+      categoryId ===
+      "__VERBS__"
+    ){
 
-      cards.filter(
-        card =>
-          card.category_id ===
-          categoryId
-      )
+      if(!verbs.length){
 
-      :
+        return toast(
+          "Aucun verbe dans le lexique."
+        );
 
-      cards;
+      }
 
 
-    if(!source.length){
+      /*
+        Chaque verbe n'apparaît
+        qu'une seule fois.
 
-      return toast(
-        "Aucune carte dans ce lexique."
-      );
+        Une des 6 formes est
+        choisie aléatoirement.
+      */
+
+      deck =
+        shuffle(verbs)
+          .slice(0,15)
+          .map(verb => {
+
+            const forms = [
+
+              {
+                tense:"Présent",
+                register:"Courant",
+                korean:
+                  verb.present_casual
+              },
+
+              {
+                tense:"Présent",
+                register:"Formel",
+                korean:
+                  verb.present_formal
+              },
+
+              {
+                tense:"Passé",
+                register:"Courant",
+                korean:
+                  verb.past_casual
+              },
+
+              {
+                tense:"Passé",
+                register:"Formel",
+                korean:
+                  verb.past_formal
+              },
+
+              {
+                tense:"Futur",
+                register:"Courant",
+                korean:
+                  verb.future_casual
+              },
+
+              {
+                tense:"Futur",
+                register:"Formel",
+                korean:
+                  verb.future_formal
+              }
+
+            ].filter(
+              form =>
+                form.korean
+            );
+
+
+            const chosen =
+              forms[
+                Math.floor(
+                  Math.random() *
+                  forms.length
+                )
+              ];
+
+
+            return {
+
+              ...verb,
+
+              reviewType:
+                "verb",
+
+              tense:
+                chosen.tense,
+
+              register:
+                chosen.register,
+
+              korean:
+                chosen.korean
+
+            };
+
+          });
+
+
+      reviewType =
+        "verbs";
 
     }
 
 
     /*
-      Maximum 15 cartes
-      mélangées aléatoirement.
+      =========================
+      CARTES CLASSIQUES
+      =========================
     */
 
-    deck =
-      shuffle(source)
-        .slice(0,15);
+    else{
+
+      const source =
+        categoryId
+
+          ?
+
+        cards.filter(
+          card =>
+            card.category_id ===
+            categoryId
+        )
+
+          :
+
+        cards;
 
 
-    index =
-      0;
+      if(!source.length){
+
+        return toast(
+          "Aucune carte dans ce lexique."
+        );
+
+      }
+
+
+      deck =
+        shuffle(source)
+          .slice(0,15);
+
+
+      reviewType =
+        "cards";
+
+    }
+
+
+    index = 0;
 
 
     score = {
@@ -3188,7 +4496,9 @@ $("start").onclick =
 
     $("stage")
       .classList
-      .remove("hidden");
+      .remove(
+        "hidden"
+      );
 
 
     showCard();
@@ -3197,22 +4507,17 @@ $("start").onclick =
 
 
 /* =====================================================
-   AFFICHAGE CARTE RÉVISION
+   AFFICHAGE RÉVISION
 ===================================================== */
 
 function showCard(){
 
-  answered =
-    false;
+  answered = false;
 
 
   const card =
     deck[index];
 
-
-  /*
-    Score.
-  */
 
   $("count").textContent =
     `Carte ${index+1} / ${deck.length}`;
@@ -3222,162 +4527,338 @@ function showCard(){
     `✔ ${score.ok} · ✘ ${score.no}`;
 
 
-  /*
-    Progression.
-  */
-
   $("bar").style.width =
     `${index / deck.length * 100}%`;
 
 
   /*
-    Carte.
+    =========================
+    VERBE
+    =========================
   */
 
-  $("reviewCard").innerHTML = `
+  if(
+    reviewType ===
+    "verbs"
+  ){
 
-    <!-- IMAGE -->
+    $("reviewCard").innerHTML = `
 
-    <div class="image">
+      <div class="image">
+
+        ${
+          card.image_url
+
+          ?
+
+          `
+
+            <img
+              src="${esc(
+                card.image_url
+              )}"
+              alt="">
+
+          `
+
+          :
+
+          `
+
+            Pas d'image
+
+          `
+
+        }
+
+      </div>
+
 
       ${
-        card.image_url
+        card.audio_url
 
         ?
 
         `
-          <img
-            src="${esc(card.image_url)}"
-            alt="">
+
+          <div class="reviewAudio">
+
+            <button
+              class="audioBtn"
+              id="reviewAudioBtn"
+              type="button">
+
+              🔊 Écouter la prononciation
+
+            </button>
+
+          </div>
+
         `
 
         :
 
         `
-          Pas d'image
+
+          <div class="noAudio">
+
+            🔇 Aucun audio pour ce verbe
+
+          </div>
+
         `
+
       }
 
-    </div>
 
+      <div class="french">
 
-    <!-- AUDIO -->
-
-    ${
-      card.audio_url
-
-      ?
-
-      `
-
-        <div class="reviewAudio">
-
-          <button
-            class="audioBtn"
-            id="reviewAudioBtn"
-            type="button">
-
-            🔊 Écouter la prononciation
-
-          </button>
-
-        </div>
-
-      `
-
-      :
-
-      `
-
-        <div class="noAudio">
-
-          🔇 Aucun audio pour cette carte
-
-        </div>
-
-      `
-    }
-
-
-    <!-- FRANÇAIS -->
-
-    <div class="french">
-
-      ${esc(card.french)}
-
-    </div>
-
-
-    <!-- RÉPONSE -->
-
-    <div class="answer">
-
-      <input
-        id="answer"
-        placeholder="Écris en 한글…"
-        autocomplete="off">
-
-
-      <button
-        class="btn gold"
-        id="reveal">
-
-        Voir la réponse
-
-      </button>
-
-    </div>
-
-
-    <!-- RÉVÉLATION -->
-
-    <div
-      id="revealBox"
-      class="reveal">
-
-      <div class="hangul">
-
-        ${esc(card.korean)}
+        ${esc(
+          card.infinitive
+        )}
 
       </div>
 
 
-      <div id="verdict"></div>
+      ${
+        card.description
 
-    </div>
+        ?
 
-  `;
+        `
+
+          <div
+            class="verbReviewDescription">
+
+            ${esc(
+              card.description
+            )}
+
+          </div>
+
+        `
+
+        :
+
+        ""
+
+      }
 
 
-  /*
-    Bouton audio.
-  */
+      <div class="verbReviewBadge">
 
-  if(card.audio_url){
+        ${esc(
+          card.tense
+        )}
 
-    $("reviewAudioBtn").onclick =
-      () => {
+        ·
 
-        playAudio(
-          card.audio_url
-        );
+        ${esc(
+          card.register
+        )}
 
-      };
+      </div>
+
+
+      <div class="answer">
+
+        <input
+          id="answer"
+          placeholder="Écris en 한글…"
+          autocomplete="off">
+
+
+        <button
+          class="btn gold"
+          id="reveal">
+
+          Voir la réponse
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="revealBox"
+        class="reveal">
+
+        <div class="hangul">
+
+          ${esc(
+            card.korean
+          )}
+
+        </div>
+
+
+        <div id="verdict"></div>
+
+      </div>
+
+    `;
+
+
+    if(card.audio_url){
+
+      $("reviewAudioBtn").onclick =
+        () => {
+
+          playAudio(
+            card.audio_url
+          );
+
+        };
+
+    }
 
   }
 
 
   /*
-    Bouton révélation.
+    =========================
+    CARTE CLASSIQUE
+    =========================
   */
+
+  else{
+
+    $("reviewCard").innerHTML = `
+
+      <div class="image">
+
+        ${
+          card.image_url
+
+          ?
+
+          `
+
+            <img
+              src="${esc(
+                card.image_url
+              )}"
+              alt="">
+
+          `
+
+          :
+
+          `
+
+            Pas d'image
+
+          `
+
+        }
+
+      </div>
+
+
+      ${
+        card.audio_url
+
+        ?
+
+        `
+
+          <div class="reviewAudio">
+
+            <button
+              class="audioBtn"
+              id="reviewAudioBtn"
+              type="button">
+
+              🔊 Écouter la prononciation
+
+            </button>
+
+          </div>
+
+        `
+
+        :
+
+        `
+
+          <div class="noAudio">
+
+            🔇 Aucun audio pour cette carte
+
+          </div>
+
+        `
+
+      }
+
+
+      <div class="french">
+
+        ${esc(
+          card.french
+        )}
+
+      </div>
+
+
+      <div class="answer">
+
+        <input
+          id="answer"
+          placeholder="Écris en 한글…"
+          autocomplete="off">
+
+
+        <button
+          class="btn gold"
+          id="reveal">
+
+          Voir la réponse
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="revealBox"
+        class="reveal">
+
+        <div class="hangul">
+
+          ${esc(
+            card.korean
+          )}
+
+        </div>
+
+
+        <div id="verdict"></div>
+
+      </div>
+
+    `;
+
+
+    if(card.audio_url){
+
+      $("reviewAudioBtn").onclick =
+        () => {
+
+          playAudio(
+            card.audio_url
+          );
+
+        };
+
+    }
+
+  }
+
 
   $("reveal").onclick =
     reveal;
 
-
-  /*
-    Entrée clavier.
-  */
 
   $("answer").onkeydown =
     event => {
@@ -3394,10 +4875,6 @@ function showCard(){
     };
 
 
-  /*
-    Focus automatique.
-  */
-
   $("answer").focus();
 
 }
@@ -3410,12 +4887,13 @@ function showCard(){
 async function reveal(){
 
   if(answered){
+
     return;
+
   }
 
 
-  answered =
-    true;
+  answered = true;
 
 
   const card =
@@ -3433,10 +4911,6 @@ async function reveal(){
     norm(card.korean);
 
 
-  /*
-    Score.
-  */
-
   if(isCorrect){
 
     score.ok++;
@@ -3447,10 +4921,6 @@ async function reveal(){
 
   }
 
-
-  /*
-    Verdict.
-  */
 
   $("verdict").className =
     isCorrect
@@ -3463,10 +4933,6 @@ async function reveal(){
       ? "Correct ✔"
       : "À revoir ✘";
 
-
-  /*
-    Affichage réponse.
-  */
 
   $("revealBox")
     .classList
@@ -3486,38 +4952,42 @@ async function reveal(){
 
 
   /*
-    Historique.
+    Historique uniquement
+    pour les cartes classiques.
   */
 
-  const historyResult =
-    await sb
-      .from("review_history")
-      .insert({
+  if(
+    reviewType ===
+    "cards"
+  ){
 
-        flashcard_id:
-          card.id,
+    const historyResult =
+      await sb
+        .from("review_history")
+        .insert({
 
-        success:
-          isCorrect,
+          flashcard_id:
+            card.id,
 
-        user_answer:
-          value
+          success:
+            isCorrect,
 
-      });
+          user_answer:
+            value
+
+        });
 
 
-  if(historyResult.error){
+    if(historyResult.error){
 
-    console.error(
-      historyResult.error
-    );
+      console.error(
+        historyResult.error
+      );
+
+    }
 
   }
 
-
-  /*
-    Bouton suivant.
-  */
 
   const nextButton =
     document.createElement(
@@ -3530,15 +5000,16 @@ async function reveal(){
 
 
   nextButton.textContent =
-    index + 1 < deck.length
+    index + 1 <
+    deck.length
 
       ?
 
-      "Carte suivante →"
+    "Carte suivante →"
 
       :
 
-      "Terminer";
+    "Terminer";
 
 
   nextButton.style.marginTop =
@@ -3550,10 +5021,6 @@ async function reveal(){
 
       index++;
 
-
-      /*
-        Fin de session.
-      */
 
       if(
         index >=
@@ -3603,10 +5070,6 @@ async function reveal(){
         `;
 
       }
-
-      /*
-        Carte suivante.
-      */
 
       else{
 
