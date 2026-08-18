@@ -348,7 +348,7 @@ select:focus{
 
 .cardVisual{
    width:100%;
-   height:112px;
+   height:140px;
    display:flex;
    align-items:center;
    justify-content:center;
@@ -356,8 +356,8 @@ select:focus{
 
 .cardrow img,
 .cardrow .thumb{
-   width:110px;
-   height:110px;
+   width:140px;
+   height:140px;
    border-radius:12px;
    object-fit:cover;
    background:#d99490;
@@ -395,6 +395,7 @@ select:focus{
    display:flex;
    align-items:center;
    justify-content:center;
+   pointer-events:none;
    flex-direction:row;
    gap:8px;
    padding:10px;
@@ -412,6 +413,10 @@ select:focus{
 .cardrow.selected .cardActions{
    opacity:1;
    visibility:visible;
+   pointer-events:none;
+}
+
+.cardrow.selected .cardActions .iconBtn{
    pointer-events:auto;
 }
 
@@ -1674,26 +1679,22 @@ function cardHtml(card){
 
 function selectCard(id){
 
-  const clickedCard = document.querySelector(
-    `.cardrow[data-card-id="${id}"]`
-  );
-
-  if(!clickedCard) return;
-
-  const wasSelected =
-    clickedCard.classList.contains("selected");
-
-  // Ferme toutes les cartes
   document
     .querySelectorAll(".cardrow.selected")
     .forEach(card => {
-      card.classList.remove("selected");
+
+      if(card.dataset.cardId !== id){
+        card.classList.remove("selected");
+      }
+
     });
 
-  // Si la carte n'était pas déjà ouverte,
-  // on l'ouvre. Sinon elle reste fermée.
-  if(!wasSelected){
-    clickedCard.classList.add("selected");
+  const card = document.querySelector(
+    `.cardrow[data-card-id="${id}"]`
+  );
+
+  if(card){
+    card.classList.toggle("selected");
   }
 
 }
